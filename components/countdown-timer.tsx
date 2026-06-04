@@ -48,7 +48,7 @@ function FlipUnit({ value, label, labelEn, isVisible, delay }: {
         <div className="border border-background/12 bg-background/4 px-4 py-7 md:py-10 text-center overflow-hidden">
           <span
             key={displayed}
-            className="font-serif text-5xl md:text-7xl font-light text-background tabular-nums block"
+            className="font-sans text-5xl md:text-7xl font-extralight text-background tabular-nums tracking-tight block"
             style={{
               animation: "number-in 0.25s ease forwards",
               opacity: flipping ? 0 : 1,
