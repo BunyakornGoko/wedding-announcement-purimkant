@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Heart } from "lucide-react"
+import Image from "next/image"
 
 function DrawLine({ isVisible, delay = 0, reverse = false }: { isVisible: boolean; delay?: number; reverse?: boolean }) {
   return (
@@ -32,7 +33,7 @@ export function CoupleSection() {
   }, [])
 
   const person = (
-    initial: string,
+    image: string,
     firstName: string,
     lastName: string,
     bio: string,
@@ -52,25 +53,28 @@ export function CoupleSection() {
       <div className="relative mb-10 inline-block">
         {/* Slow-spinning decorative ring */}
         <div
-          className="absolute inset-0 rounded-full border border-dashed border-primary/20"
+          className="absolute rounded-full border border-dashed border-primary/20"
           style={{
             inset: "-12px",
-            borderRadius: "50%",
             animation: isVisible ? `spin-slow ${side === "left" ? 30 : 40}s linear infinite ${side === "right" ? "reverse" : ""}` : "none",
           }}
         />
-        {/* Static ring */}
-        <div className="w-52 h-52 md:w-64 md:h-64 rounded-full border border-primary/18 flex items-center justify-center">
+        {/* Static ring + photo */}
+        <div className="w-52 h-52 md:w-64 md:h-64 rounded-full border border-primary/18 flex items-center justify-center overflow-hidden">
           <div
-            className="w-44 h-44 md:w-56 md:h-56 rounded-full bg-secondary/60 border border-primary/10 flex items-center justify-center"
+            className="w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border border-primary/10"
             style={{
               transform: isVisible ? "scale(1)" : "scale(0.85)",
               transition: `transform 0.9s cubic-bezier(0.16,1,0.3,1) ${delay + 200}ms`,
             }}
           >
-            <span className="font-serif text-6xl md:text-7xl text-primary/45 font-light select-none">
-              {initial}
-            </span>
+            <Image
+              src={image}
+              alt={firstName}
+              width={256}
+              height={256}
+              className="w-full h-full object-cover object-top"
+            />
           </div>
         </div>
         {/* Badge */}
@@ -128,7 +132,7 @@ export function CoupleSection() {
 
         {/* Grid */}
         <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 max-w-5xl mx-auto items-center">
-          {person("ป", "นายปุริมพัฒน์", "เจียรสุนันท์", "บุตรชายคนโตของครอบครัวเจียรสุนันท์\nผู้เปี่ยมด้วยความรักและความมุ่งมั่น", "GROOM", "left", 200)}
+          {person("/kring.jpg", "นายปุริมพัฒน์", "เจียรสุนันท์", "บุตรชายคนโตของครอบครัวเจียรสุนันท์\nผู้เปี่ยมด้วยความรักและความมุ่งมั่น", "GROOM", "left", 200)}
 
           {/* Center divider */}
           <div
@@ -161,7 +165,7 @@ export function CoupleSection() {
             />
           </div>
 
-          {person("ก", "นางสาวกานต์ธิดา", "พรสมบัติไพบูลย์", "ธิดาสุดที่รักของครอบครัวพรสมบัติไพบูลย์\nผู้มีหัวใจอ่อนโยนและงดงาม", "BRIDE", "right", 300)}
+          {person("/kant.jpg", "นางสาวกานต์ธิดา", "พรสมบัติไพบูลย์", "ธิดาสุดที่รักของครอบครัวพรสมบัติไพบูลย์\nผู้มีหัวใจอ่อนโยนและงดงาม", "BRIDE", "right", 300)}
         </div>
 
         {/* Quote */}
