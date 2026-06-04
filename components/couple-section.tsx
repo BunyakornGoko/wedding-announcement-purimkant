@@ -112,7 +112,7 @@ export function CoupleSection() {
             </p>
             <DrawLine isVisible={isVisible} delay={100} reverse />
           </div>
-          <div className="overflow-hidden pt-4 -mt-4">
+          <div className="overflow-hidden pt-4 -mt-4 pb-4 -mb-4">
             <h2
               className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground font-light"
               style={{

@@ -178,9 +178,9 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
             </div>
 
             {/* Title */}
-            <div className="overflow-hidden pt-4 -mt-4 mb-16">
+            <div className="overflow-hidden pt-4 -mt-4 pb-4 -mb-4">
               <h2
-                className="font-serif text-3xl md:text-5xl lg:text-6xl font-light"
+                className="font-serif text-3xl md:text-5xl lg:text-6xl font-light mb-16"
                 style={{
                   transform: isVisible ? "translateY(0)" : "translateY(100%)",
                   opacity: isVisible ? 1 : 0,

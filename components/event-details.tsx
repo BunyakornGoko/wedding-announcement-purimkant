@@ -18,9 +18,18 @@ export function EventDetails() {
   }, [])
 
   const scheduleItems = [
-    { time: "16:00", title: "ลงทะเบียนแขก", titleEn: "Guest Registration", description: "ต้อนรับแขกผู้มีเกียรติทุกท่าน" },
-    { time: "17:00", title: "พิธีมงคลสมรส", titleEn: "Wedding Ceremony", description: "พิธีแต่งงานตามประเพณีไทย" },
-    { time: "18:30", title: "งานเลี้ยงฉลอง", titleEn: "Reception Dinner", description: "ร่วมรับประทานอาหารและฉลองความสุข" },
+    { time: "14:30", title: "เจ้าบ่าวเจ้าสาวเตรียมพร้อม", titleEn: "Bride & Groom Preparation" },
+    { time: "16:00", title: "พิธีแห่ขันหมาก", titleEn: "Khan Mak Procession" },
+    { time: "16:10", title: "พิธีสู่ขอ · ปูเรียงสินสอด · สวมแหวนหมั้น", titleEn: "Engagement Ceremony" },
+    { time: "16:20", title: "ยกน้ำชา", titleEn: "Tea Ceremony" },
+    { time: "17:20", title: "เจ้าบ่าวเจ้าสาวเปลี่ยนชุด", titleEn: "Outfit Change" },
+    { time: "18:00", title: "เปิดไลน์อาหาร (บุฟเฟต์)", titleEn: "Buffet Opens" },
+    { time: "18:30", title: "เปิดตัวเข้างาน", titleEn: "Grand Entrance" },
+    { time: "18:45", title: "สัมภาษณ์พูดคุย", titleEn: "Interview & Speech" },
+    { time: "18:50", title: "พิธีรดน้ำต้นไม้", titleEn: "Plant Watering Ceremony" },
+    { time: "19:00", title: "โยนช่อดอกไม้", titleEn: "Bouquet Toss" },
+    { time: "19:10", title: "เจ้าบ่าวเจ้าสาวกล่าวขอบคุณแขก", titleEn: "Thank You Speech" },
+    { time: "19:20 – 22:00", title: "งานเลี้ยงฉลอง", titleEn: "Reception Party" },
   ]
 
   return (
@@ -73,7 +82,7 @@ export function EventDetails() {
                 </div>
                 <div className="flex items-center gap-3 text-foreground/60 text-sm">
                   <Clock className="w-4 h-4 text-primary/70 shrink-0" />
-                  <span>เริ่มเวลา 16:00 น.</span>
+                  <span>เริ่มเวลา 14:30 น.</span>
                 </div>
               </div>
 
@@ -108,22 +117,19 @@ export function EventDetails() {
 
               <div className="space-y-0">
                 {scheduleItems.map((item, index) => (
-                  <div key={index} className="flex gap-5">
-                    {/* Timeline line + dot */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full border-2 border-primary/30 bg-primary/5 flex items-center justify-center shrink-0">
-                        <div className="w-2 h-2 rounded-full bg-primary/60" />
-                      </div>
+                  <div key={index} className="flex gap-4">
+                    {/* Timeline dot + line */}
+                    <div className="flex flex-col items-center pt-1 shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-primary/50 shrink-0" />
                       {index < scheduleItems.length - 1 && (
-                        <div className="w-px flex-1 bg-gradient-to-b from-primary/20 to-transparent my-1 min-h-[32px]" />
+                        <div className="w-px flex-1 bg-primary/15 my-1 min-h-[20px]" />
                       )}
                     </div>
 
-                    <div className="pb-8 flex-1">
-                      <p className="text-primary text-sm font-medium mb-0.5">{item.time} น.</p>
-                      <h4 className="font-serif text-xl text-foreground mb-0.5">{item.title}</h4>
-                      <p className="text-muted-foreground/60 text-xs tracking-wider mb-1">{item.titleEn}</p>
-                      <p className="text-muted-foreground text-sm">{item.description}</p>
+                    <div className="pb-4 flex-1 min-w-0">
+                      <p className="text-primary text-xs font-medium tracking-wide mb-0.5">{item.time} น.</p>
+                      <h4 className="font-serif text-base text-foreground leading-snug">{item.title}</h4>
+                      <p className="text-muted-foreground/55 text-[10px] tracking-wider">{item.titleEn}</p>
                     </div>
                   </div>
                 ))}
