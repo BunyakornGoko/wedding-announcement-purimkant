@@ -71,7 +71,7 @@ export function Footer() {
           </nav>
 
           {/* Bottom line */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px w-16 bg-background/10" />
             <svg className="w-5 h-5 text-background/20" viewBox="0 0 30 30" fill="currentColor">
               <ellipse cx="15" cy="8" rx="4" ry="8" />
@@ -80,6 +80,10 @@ export function Footer() {
             </svg>
             <div className="h-px w-16 bg-background/10" />
           </div>
+
+          <p className="text-background/20 text-[9px] tracking-[0.25em]">
+            created by BunyakornGoko
+          </p>
         </div>
       </div>
     </footer>
