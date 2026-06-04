@@ -80,7 +80,7 @@ export function EventDetails() {
               <Button
                 render={<a href="https://www.google.com/maps/place/Haus+Garden/@13.6786956,100.4859019,17z/data=!3m1!4b1!4m6!3m5!1s0x30e2a333312d259b:0xb489d98f2f36b7a7!8m2!3d13.6786956!4d100.4859019!16s%2Fg%2F11l2_4r6gm!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
-                className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none h-11 tracking-wider text-xs"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/85 rounded-none h-11 tracking-wider text-xs"
               >
                 <Navigation className="w-4 h-4 mr-2" />
                 เปิดแผนที่
