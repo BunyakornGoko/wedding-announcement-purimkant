@@ -6,7 +6,7 @@ import { GuestInfo } from "@/components/guest-info"
 import { Footer } from "@/components/footer"
 
 export default function WeddingPage() {
-  const weddingDate = new Date("2026-12-19T16:00:00+07:00")
+  const weddingDate = new Date("2026-12-19T14:30:00+07:00")
 
   return (
     <main className="min-h-screen">
