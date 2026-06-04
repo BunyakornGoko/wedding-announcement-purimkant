@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Geist, Mitr } from 'next/font/google'
 import './globals.css'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { FallingPetals } from '@/components/falling-petals'
+import { MusicPlayer } from '@/components/music-player'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -62,6 +63,7 @@ export default function RootLayout({
         <ScrollProgress />
         <FallingPetals />
         {children}
+        <MusicPlayer />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
