@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Geist } from 'next/font/google'
 import './globals.css'
+import { ScrollProgress } from '@/components/scroll-progress'
+import { FallingPetals } from '@/components/falling-petals'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -51,6 +53,8 @@ export default function RootLayout({
   return (
     <html lang="th" className={`${cormorant.variable} ${geist.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <ScrollProgress />
+        <FallingPetals />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

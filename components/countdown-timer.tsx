@@ -1,10 +1,70 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Heart } from "lucide-react"
 
 interface CountdownTimerProps {
   targetDate: Date
+}
+
+function FlipUnit({ value, label, labelEn, isVisible, delay }: {
+  value: number
+  label: string
+  labelEn: string
+  isVisible: boolean
+  delay: number
+}) {
+  const [displayed, setDisplayed] = useState(value)
+  const [flipping, setFlipping] = useState(false)
+  const pendingValue = useRef(value)
+
+  useEffect(() => {
+    if (value === displayed) return
+    pendingValue.current = value
+    setFlipping(true)
+    const t = setTimeout(() => {
+      setDisplayed(pendingValue.current)
+      setFlipping(false)
+    }, 180)
+    return () => clearTimeout(t)
+  }, [value, displayed])
+
+  return (
+    <div
+      className="flex flex-col items-center"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+      }}
+    >
+      <div className="relative min-w-[88px] md:min-w-[126px]">
+        {/* Corner brackets */}
+        <span className="absolute -top-2.5 -left-2.5 w-5 h-5 border-t border-l border-background/35" />
+        <span className="absolute -top-2.5 -right-2.5 w-5 h-5 border-t border-r border-background/35" />
+        <span className="absolute -bottom-2.5 -left-2.5 w-5 h-5 border-b border-l border-background/35" />
+        <span className="absolute -bottom-2.5 -right-2.5 w-5 h-5 border-b border-r border-background/35" />
+
+        <div className="border border-background/12 bg-background/4 px-4 py-7 md:py-10 text-center overflow-hidden">
+          <span
+            key={displayed}
+            className="font-serif text-5xl md:text-7xl font-light text-background tabular-nums block"
+            style={{
+              animation: "number-in 0.25s ease forwards",
+              opacity: flipping ? 0 : 1,
+              transform: flipping ? "translateY(-8px) scale(0.94)" : "translateY(0) scale(1)",
+              transition: "opacity 0.18s ease, transform 0.18s ease",
+            }}
+          >
+            {String(displayed).padStart(2, "0")}
+          </span>
+        </div>
+      </div>
+
+      <p className="mt-5 text-background/38 text-[9px] tracking-[0.45em] text-center">{labelEn}</p>
+      <p className="text-background/60 text-sm mt-1 font-serif text-center">{label}</p>
+    </div>
+  )
 }
 
 export function CountdownTimer({ targetDate }: CountdownTimerProps) {
@@ -30,10 +90,10 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
       } else {
         setTimeLeft({
-          days: Math.floor(diff / 86400000),
-          hours: Math.floor((diff / 3600000) % 24),
-          minutes: Math.floor((diff / 60000) % 60),
-          seconds: Math.floor((diff / 1000) % 60),
+          days:    Math.floor(diff / 86400000),
+          hours:   Math.floor((diff / 3600000) % 24),
+          minutes: Math.floor((diff / 60000)   % 60),
+          seconds: Math.floor((diff / 1000)    % 60),
         })
       }
     }
@@ -43,10 +103,10 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate])
 
   const units = [
-    { value: timeLeft.days, label: "วัน", labelEn: "DAYS" },
-    { value: timeLeft.hours, label: "ชั่วโมง", labelEn: "HOURS" },
-    { value: timeLeft.minutes, label: "นาที", labelEn: "MINUTES" },
-    { value: timeLeft.seconds, label: "วินาที", labelEn: "SECONDS" },
+    { value: timeLeft.days,    label: "วัน",      labelEn: "DAYS"    },
+    { value: timeLeft.hours,   label: "ชั่วโมง",  labelEn: "HOURS"   },
+    { value: timeLeft.minutes, label: "นาที",     labelEn: "MINUTES" },
+    { value: timeLeft.seconds, label: "วินาที",   labelEn: "SECONDS" },
   ]
 
   return (
@@ -55,75 +115,110 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
       ref={sectionRef}
       className="py-24 md:py-36 bg-foreground text-background overflow-hidden relative"
     >
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      {/* Subtle repeating botanical pattern in background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]" aria-hidden>
+        <svg className="w-full h-full" viewBox="0 0 80 80" preserveAspectRatio="xMidYMid slice">
           <defs>
-            <pattern id="leaf-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M10,2 Q13,6 10,11 Q7,6 10,2 M10,11 Q13,15 10,19 Q7,15 10,11" fill="currentColor" />
+            <pattern id="bg-leaf" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M20,4 Q24,12 20,22 Q16,12 20,4 M20,22 Q24,30 20,38 Q16,30 20,22" fill="currentColor" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#leaf-pattern)" />
+          <rect width="100%" height="100%" fill="url(#bg-leaf)" />
         </svg>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {isWeddingDay ? (
-          <div className={`text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <Heart className="w-16 h-16 text-background/60 mx-auto mb-8 fill-background/20 animate-pulse" />
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6">
+          <div
+            className="text-center"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 0.7s ease, transform 0.7s ease",
+            }}
+          >
+            <div className="relative inline-block mb-8">
+              <span className="absolute inset-0 rounded-full bg-background/15" style={{ animation: "ripple-out 2s ease-out infinite" }} />
+              <span className="absolute inset-0 rounded-full bg-background/10" style={{ animation: "ripple-out 2s ease-out 0.7s infinite" }} />
+              <Heart className="w-14 h-14 text-background/50 fill-background/15 relative z-10" />
+            </div>
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6 font-light">
               วันนี้คือวันพิเศษของเรา
             </h2>
-            <p className="text-background/60 tracking-[0.3em] text-sm">
-              TODAY IS OUR WEDDING DAY
-            </p>
-            <p className="font-serif text-xl md:text-2xl text-background/80 mt-6 italic">
+            <p className="text-background/50 tracking-[0.35em] text-xs">TODAY IS OUR WEDDING DAY</p>
+            <p className="font-serif text-xl md:text-2xl text-background/75 mt-8 italic">
               ขอบคุณทุกคนที่มาร่วมแบ่งปันความสุขกับเรา
             </p>
           </div>
         ) : (
-          <div className={`text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-12 bg-background/20" />
-              <p className="text-background/40 text-[10px] tracking-[0.5em]">COUNTING DOWN TO</p>
-              <div className="h-px w-12 bg-background/20" />
+          <div className="text-center">
+            {/* Section label */}
+            <div
+              className="flex items-center justify-center gap-4 mb-4"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transition: "opacity 0.7s ease",
+              }}
+            >
+              <div
+                className="h-px bg-background/20"
+                style={{
+                  width: isVisible ? "48px" : "0px",
+                  transition: "width 0.8s ease 0.3s",
+                }}
+              />
+              <p className="text-background/38 text-[9px] tracking-[0.55em]">COUNTING DOWN TO</p>
+              <div
+                className="h-px bg-background/20"
+                style={{
+                  width: isVisible ? "48px" : "0px",
+                  transition: "width 0.8s ease 0.3s",
+                }}
+              />
             </div>
 
-            <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl mb-16 font-light">
-              นับถอยหลังสู่วันแห่งความรัก
-            </h2>
+            {/* Title */}
+            <div className="overflow-hidden pt-4 -mt-4 mb-16">
+              <h2
+                className="font-serif text-3xl md:text-5xl lg:text-6xl font-light"
+                style={{
+                  transform: isVisible ? "translateY(0)" : "translateY(100%)",
+                  opacity: isVisible ? 1 : 0,
+                  transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s, opacity 0.8s ease 0.15s",
+                }}
+              >
+                นับถอยหลังสู่วันแห่งความรัก
+              </h2>
+            </div>
 
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-              {units.map((unit, index) => (
-                <div
+            {/* Units */}
+            <div className="flex flex-wrap justify-center gap-7 md:gap-12">
+              {units.map((unit, i) => (
+                <FlipUnit
                   key={unit.labelEn}
-                  className={`transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-                  style={{ transitionDelay: `${index * 120 + 200}ms` }}
-                >
-                  <div className="relative min-w-[88px] md:min-w-[128px]">
-                    {/* Outer corner brackets */}
-                    <span className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-background/40" />
-                    <span className="absolute -top-2 -right-2 w-4 h-4 border-t border-r border-background/40" />
-                    <span className="absolute -bottom-2 -left-2 w-4 h-4 border-b border-l border-background/40" />
-                    <span className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-background/40" />
-
-                    <div className="border border-background/15 bg-background/5 px-4 py-7 md:py-9 text-center">
-                      <span className="font-serif text-5xl md:text-7xl font-light text-background tabular-nums">
-                        {String(unit.value).padStart(2, "0")}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="mt-5 text-background/40 text-[9px] tracking-[0.4em] text-center">{unit.labelEn}</p>
-                  <p className="text-background/60 text-sm mt-1 font-serif text-center">{unit.label}</p>
-                </div>
+                  value={unit.value}
+                  label={unit.label}
+                  labelEn={unit.labelEn}
+                  isVisible={isVisible}
+                  delay={i * 120 + 300}
+                />
               ))}
             </div>
 
-            <div className="mt-16 flex items-center justify-center gap-4">
-              <div className="h-px w-16 bg-background/15" />
-              <Heart className="w-4 h-4 text-background/30 fill-background/10" />
-              <div className="h-px w-16 bg-background/15" />
+            {/* Bottom ornament */}
+            <div
+              className="mt-16 flex items-center justify-center gap-4"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transition: "opacity 0.7s ease 0.8s",
+              }}
+            >
+              <div className="h-px w-16 bg-background/12" />
+              <div className="relative">
+                <span className="absolute inset-0 rounded-full bg-background/10" style={{ animation: "ripple-out 2.5s ease-out infinite" }} />
+                <Heart className="w-4 h-4 text-background/28 fill-background/8 relative z-10" />
+              </div>
+              <div className="h-px w-16 bg-background/12" />
             </div>
           </div>
         )}
