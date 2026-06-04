@@ -27,7 +27,7 @@ export function GuestInfo() {
       icon: Camera,
       title: "แฮชแท็ก",
       titleEn: "HASHTAG",
-      description: "#PurimKantWedding2026",
+      description: "#KringGateWedding2026",
     },
     {
       icon: Gift,
