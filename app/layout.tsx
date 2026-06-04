@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Geist } from 'next/font/google'
+import { Cormorant_Garamond, Geist, Mitr } from 'next/font/google'
 import './globals.css'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { FallingPetals } from '@/components/falling-petals'
@@ -14,6 +14,12 @@ const cormorant = Cormorant_Garamond({
 const geist = Geist({
   subsets: ['latin'],
   variable: '--font-sans',
+})
+
+const mitr = Mitr({
+  subsets: ['thai', 'latin'],
+  weight: ['200', '300', '400'],
+  variable: '--font-thai',
 })
 
 export const metadata: Metadata = {
@@ -51,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="th" className={`${cormorant.variable} ${geist.variable} bg-background`}>
+    <html lang="th" className={`${cormorant.variable} ${geist.variable} ${mitr.variable} bg-background`}>
       <body className="font-sans antialiased">
         <ScrollProgress />
         <FallingPetals />

@@ -7,7 +7,7 @@
 @theme inline {
   --font-heading: var(--font-serif);
   --font-sans: 'Geist', 'Geist Fallback';
-  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-serif: 'Cormorant Garamond', 'Mitr', 'Georgia', serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
