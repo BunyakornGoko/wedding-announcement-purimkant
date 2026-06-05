@@ -12,7 +12,7 @@ function DrawLine({ isVisible, delay = 0, reverse = false }: { isVisible: boolea
         style={{
           transform: isVisible ? "scaleX(1)" : "scaleX(0)",
           transformOrigin: reverse ? "right" : "left",
-          transition: `transform 0.9s ease ${delay}ms`,
+          transition: `transform 1.4s ease ${delay}ms`,
         }}
       />
     </div>
@@ -26,7 +26,7 @@ export function CoupleSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
-      { threshold: 0.12 }
+      { threshold: 0.3, rootMargin: "0px 0px -80px 0px" }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
@@ -46,7 +46,7 @@ export function CoupleSection() {
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateX(0)" : `translateX(${side === "left" ? "-40px" : "40px"})`,
-        transition: `opacity 0.8s ease ${delay}ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+        transition: `opacity 1.2s ease ${delay}ms, transform 1.2s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
       }}
     >
       {/* Photo circle with spinning outer ring */}
@@ -65,7 +65,7 @@ export function CoupleSection() {
             className="w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border border-primary/10"
             style={{
               transform: isVisible ? "scale(1)" : "scale(0.85)",
-              transition: `transform 0.9s cubic-bezier(0.16,1,0.3,1) ${delay + 200}ms`,
+              transition: `transform 1.4s cubic-bezier(0.16,1,0.3,1) ${delay + 200}ms`,
             }}
           >
             <Image
@@ -87,7 +87,7 @@ export function CoupleSection() {
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? "translateY(0)" : "translateY(14px)",
-          transition: `opacity 0.7s ease ${delay + 350}ms, transform 0.7s ease ${delay + 350}ms`,
+          transition: `opacity 1.1s ease ${delay + 350}ms, transform 1.1s ease ${delay + 350}ms`,
         }}
       >
         <h3 className="font-serif text-2xl md:text-3xl text-foreground font-light mb-1">{firstName}</h3>
@@ -109,7 +109,7 @@ export function CoupleSection() {
               className="text-muted-foreground text-[9px] tracking-[0.55em] shrink-0"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transition: "opacity 0.7s ease 0.3s",
+                transition: "opacity 1.1s ease 0.3s",
               }}
             >
               THE BRIDE & GROOM
@@ -122,7 +122,7 @@ export function CoupleSection() {
               style={{
                 transform: isVisible ? "translateY(0)" : "translateY(100%)",
                 opacity: isVisible ? 1 : 0,
-                transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 0.8s ease 0.2s",
+                transition: "transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 1.2s ease 0.2s",
               }}
             >
               เจ้าบ่าว & เจ้าสาว
@@ -139,14 +139,14 @@ export function CoupleSection() {
             className="flex flex-col items-center gap-5"
             style={{
               opacity: isVisible ? 1 : 0,
-              transition: "opacity 0.8s ease 0.5s",
+              transition: "opacity 1.2s ease 0.5s",
             }}
           >
             <div
               className="w-px hidden md:block bg-gradient-to-b from-transparent via-primary/25 to-transparent"
               style={{
                 height: isVisible ? "100px" : "0px",
-                transition: "height 1s ease 0.6s",
+                transition: "height 1.5s ease 0.6s",
               }}
             />
             <div className="relative">
@@ -160,7 +160,7 @@ export function CoupleSection() {
               className="w-px hidden md:block bg-gradient-to-b from-transparent via-primary/25 to-transparent"
               style={{
                 height: isVisible ? "100px" : "0px",
-                transition: "height 1s ease 0.6s",
+                transition: "height 1.5s ease 0.6s",
               }}
             />
           </div>
@@ -174,7 +174,7 @@ export function CoupleSection() {
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(24px)",
-            transition: "opacity 0.8s ease 0.7s, transform 0.8s ease 0.7s",
+            transition: "opacity 1.2s ease 0.7s, transform 1.2s ease 0.7s",
           }}
         >
           <div className="max-w-2xl mx-auto relative px-10">
