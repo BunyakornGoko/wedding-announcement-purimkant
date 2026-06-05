@@ -51,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" className={`${cormorant.variable} ${geist.variable} ${mitr.variable} bg-background`}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-x-hidden max-w-full">
         <ScrollProgress />
         <FallingPetals />
         {children}

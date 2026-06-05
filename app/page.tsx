@@ -3,6 +3,7 @@ import { CountdownTimer } from "@/components/countdown-timer"
 import { CoupleSection } from "@/components/couple-section"
 import { EventDetails } from "@/components/event-details"
 import { GuestInfo } from "@/components/guest-info"
+import { EnvelopeQR } from "@/components/envelope-qr"
 import { Footer } from "@/components/footer"
 
 export default function WeddingPage() {
@@ -15,6 +16,7 @@ export default function WeddingPage() {
       <CoupleSection />
       <EventDetails />
       <GuestInfo />
+      <EnvelopeQR />
       <Footer />
     </main>
   )
