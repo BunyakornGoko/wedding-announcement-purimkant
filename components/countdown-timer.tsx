@@ -75,7 +75,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
+      ([entry]) => { setIsVisible(entry.isIntersecting) },
       { threshold: 0.2 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)

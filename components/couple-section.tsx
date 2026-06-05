@@ -25,7 +25,7 @@ export function CoupleSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
+      ([entry]) => { setIsVisible(entry.isIntersecting) },
       { threshold: 0.11 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
