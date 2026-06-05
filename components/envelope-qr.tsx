@@ -193,6 +193,7 @@ export function EnvelopeQR() {
                   transform: flapOpen ? "rotateX(-172deg)" : "rotateX(0deg)",
                   transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1)",
                   transformStyle: "preserve-3d",
+                  WebkitTransformStyle: "preserve-3d",
                   zIndex: 2,
                 }}
               >
@@ -203,15 +204,17 @@ export function EnvelopeQR() {
                     background: "oklch(0.91 0.025 145)",
                     borderBottom: "0.8px solid oklch(0.80 0.045 145)",
                     backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                   }}
                 />
                 <div
                   className="absolute inset-0"
                   style={{
-                    clipPath: "polygon(0% 0%, 100% 0%, 50% 82%)",
+                    clipPath: "polygon(0% 100%, 100% 100%, 50% 18%)",
                     background: "oklch(0.95 0.015 145)",
                     transform: "rotateX(180deg)",
                     backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                   }}
                 />
               </div>
