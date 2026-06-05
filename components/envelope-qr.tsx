@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { X } from "lucide-react"
 
@@ -26,6 +26,29 @@ export function EnvelopeQR() {
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
   }, [phase])
+
+  const envelopeRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = envelopeRef.current
+    if (!el) return
+
+    const bounce = () => {
+      el.animate([
+        { transform: "translateY(0)     rotate(0deg)  scale(1)"    },
+        { transform: "translateY(-16px) rotate(-4deg) scale(1.06)" },
+        { transform: "translateY(0px)   rotate(4deg)  scale(1)"    },
+        { transform: "translateY(-10px) rotate(-2deg) scale(1.03)" },
+        { transform: "translateY(0px)   rotate(2deg)  scale(1)"    },
+        { transform: "translateY(-5px)  rotate(-1deg) scale(1.01)" },
+        { transform: "translateY(0)     rotate(0deg)  scale(1)"    },
+      ], { duration: 900, easing: "ease-in-out" })
+    }
+
+    bounce()
+    const id = setInterval(bounce, 2000)
+    return () => clearInterval(id)
+  }, [])
 
   const mounted  = phase !== "idle"
   const visible  = phase !== "exit" && phase !== "idle"
@@ -53,7 +76,7 @@ export function EnvelopeQR() {
             className="group inline-flex flex-col items-center gap-2 focus:outline-none"
             aria-label="เปิดซอง"
           >
-            <div className="relative w-44 h-32 transition-transform duration-300 group-hover:-translate-y-2">
+            <div ref={envelopeRef} className="relative w-44 h-32">
               <div className="absolute inset-0 bg-card border border-primary/30 shadow-md group-hover:shadow-lg transition-shadow duration-300" />
               <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 176 128">
                 <line x1="0"   y1="128" x2="88" y2="74" stroke="oklch(0.78 0.05 145)" strokeWidth="0.8" opacity="0.6" />
