@@ -5,6 +5,7 @@ import './globals.css'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { FallingPetals } from '@/components/falling-petals'
 import { MusicPlayer } from '@/components/music-player'
+import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -52,10 +53,12 @@ export default function RootLayout({
   return (
     <html lang="th" className={`${cormorant.variable} ${geist.variable} ${mitr.variable} bg-background`}>
       <body className="font-sans antialiased overflow-x-hidden max-w-full">
-        <ScrollProgress />
-        <FallingPetals />
-        {children}
-        <MusicPlayer />
+        <SmoothScrollProvider>
+          <ScrollProgress />
+          <FallingPetals />
+          {children}
+          <MusicPlayer />
+        </SmoothScrollProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
