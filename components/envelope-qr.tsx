@@ -58,8 +58,149 @@ export function EnvelopeQR() {
   return (
     <>
       {/* ── Trigger section ───────────────────────── */}
-      <section className="py-24 md:py-32 text-center bg-secondary/20">
-        <div className="container mx-auto px-4">
+      <section className="py-24 md:py-32 text-center bg-secondary/20 relative overflow-hidden">
+
+        {/* ── Botanical decoration layer ── */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+          {/* Left large botanical branch — desktop only */}
+          <div
+            className="hidden md:block absolute left-0 top-0 h-full w-72 text-primary/[0.14]"
+            style={{ animation: "float-slow 16s ease-in-out infinite" }}
+          >
+            <svg viewBox="0 0 210 560" fill="currentColor" className="w-full h-full">
+              <path d="M22,555 Q42,460 56,385 Q70,310 60,248 Q50,185 74,120 Q96,58 138,10"
+                fill="none" stroke="currentColor" strokeWidth="1.3" opacity="0.45" />
+              <path d="M105,52 C74,35 15,24 8,0 C60,8 100,36 105,52Z" />
+              <path d="M82,132 C105,103 162,88 174,52 C130,80 79,108 82,132Z" opacity="0.8" />
+              <path d="M65,222 C43,198 4,188 0,158 C33,170 63,198 65,222Z" opacity="0.7" />
+              <path d="M62,305 C80,279 132,272 143,246 C108,265 60,289 62,305Z" opacity="0.63" />
+              <path d="M42,398 C21,378 4,363 2,338 C23,350 42,376 42,398Z" opacity="0.5" />
+              <path d="M60,165 C48,150 58,129 69,123 C63,137 57,153 60,165Z" opacity="0.38" />
+              <circle cx="138" cy="10" r="5" opacity="0.52" />
+              <circle cx="174" cy="52" r="3.5" opacity="0.46" />
+              <circle cx="143" cy="246" r="3" opacity="0.42" />
+            </svg>
+          </div>
+
+          {/* Right large botanical branch (mirrored) — desktop only */}
+          <div
+            className="hidden md:block absolute right-0 top-0 h-full w-72 text-primary/[0.14]"
+            style={{ animation: "float 18s ease-in-out 2.5s infinite" }}
+          >
+            <svg viewBox="0 0 210 560" fill="currentColor" className="w-full h-full"
+                 style={{ transform: "scaleX(-1)" }}>
+              <path d="M22,555 Q42,460 56,385 Q70,310 60,248 Q50,185 74,120 Q96,58 138,10"
+                fill="none" stroke="currentColor" strokeWidth="1.3" opacity="0.45" />
+              <path d="M105,52 C74,35 15,24 8,0 C60,8 100,36 105,52Z" />
+              <path d="M82,132 C105,103 162,88 174,52 C130,80 79,108 82,132Z" opacity="0.8" />
+              <path d="M65,222 C43,198 4,188 0,158 C33,170 63,198 65,222Z" opacity="0.7" />
+              <path d="M62,305 C80,279 132,272 143,246 C108,265 60,289 62,305Z" opacity="0.63" />
+              <path d="M42,398 C21,378 4,363 2,338 C23,350 42,376 42,398Z" opacity="0.5" />
+              <path d="M60,165 C48,150 58,129 69,123 C63,137 57,153 60,165Z" opacity="0.38" />
+              <circle cx="138" cy="10" r="5" opacity="0.52" />
+              <circle cx="174" cy="52" r="3.5" opacity="0.46" />
+              <circle cx="143" cy="246" r="3" opacity="0.42" />
+            </svg>
+          </div>
+
+          {/* Small scattered petals — desktop only */}
+          <div className="hidden md:block absolute top-[18%] left-[17%] w-7 h-7 text-primary/[0.13]"
+               style={{ animation: "float 8s ease-in-out 2s infinite" }}>
+            <svg viewBox="0 0 28 28" fill="currentColor">
+              <ellipse cx="14" cy="7" rx="4" ry="7" />
+              <ellipse cx="21" cy="18" rx="4" ry="7" transform="rotate(60 21 18)" />
+              <ellipse cx="7"  cy="18" rx="4" ry="7" transform="rotate(-60 7 18)" />
+            </svg>
+          </div>
+          <div className="hidden md:block absolute top-[65%] right-[16%] w-6 h-6 text-primary/[0.11]"
+               style={{ animation: "float-slow 10s ease-in-out 5s infinite" }}>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,1 Q15,6 12,12 Q9,6 12,1 M12,12 Q15,18 12,23 Q9,18 12,12 M1,12 Q6,9 12,12 Q6,15 1,12 M12,12 Q18,9 23,12 Q18,15 12,12" />
+            </svg>
+          </div>
+          <div className="hidden md:block absolute top-[44%] left-[8%] w-5 h-5 text-primary/[0.10]"
+               style={{ animation: "float 7s ease-in-out 1s infinite" }}>
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <ellipse cx="10" cy="5" rx="3" ry="5" />
+              <ellipse cx="15" cy="14" rx="3" ry="5" transform="rotate(60 15 14)" />
+              <ellipse cx="5"  cy="14" rx="3" ry="5" transform="rotate(-60 5 14)" />
+            </svg>
+          </div>
+          <div className="hidden md:block absolute top-[28%] right-[18%] w-8 h-8 text-primary/[0.12]"
+               style={{ animation: "float-slow 9s ease-in-out 4s infinite" }}>
+            <svg viewBox="0 0 30 30" fill="currentColor">
+              <ellipse cx="15" cy="7" rx="4" ry="7" />
+              <ellipse cx="22" cy="19" rx="4" ry="7" transform="rotate(60 22 19)" />
+              <ellipse cx="8"  cy="19" rx="4" ry="7" transform="rotate(-60 8 19)" />
+            </svg>
+          </div>
+
+          {/* Mobile corner accents — small botanical corners, mobile only */}
+          <div className="block md:hidden absolute top-0 left-0 w-24 h-24 text-primary/[0.18]"
+               style={{ animation: "float-slow 12s ease-in-out infinite" }}>
+            <svg viewBox="0 0 96 96" fill="currentColor" className="w-full h-full">
+              <path d="M0,96 Q18,60 22,30 Q26,10 40,0 C32,12 20,32 18,55 Q14,72 0,96Z" opacity="0.7" />
+              <path d="M40,0 C28,5 10,20 0,40 C8,28 22,16 40,0Z" opacity="0.5" />
+              <circle cx="40" cy="0" r="3.5" opacity="0.5" />
+            </svg>
+          </div>
+          <div className="block md:hidden absolute top-0 right-0 w-24 h-24 text-primary/[0.18]"
+               style={{ animation: "float 14s ease-in-out 2s infinite" }}>
+            <svg viewBox="0 0 96 96" fill="currentColor" className="w-full h-full"
+                 style={{ transform: "scaleX(-1)" }}>
+              <path d="M0,96 Q18,60 22,30 Q26,10 40,0 C32,12 20,32 18,55 Q14,72 0,96Z" opacity="0.7" />
+              <path d="M40,0 C28,5 10,20 0,40 C8,28 22,16 40,0Z" opacity="0.5" />
+              <circle cx="40" cy="0" r="3.5" opacity="0.5" />
+            </svg>
+          </div>
+          <div className="block md:hidden absolute bottom-0 left-0 w-20 h-20 text-primary/[0.15]"
+               style={{ animation: "float-slow 13s ease-in-out 3s infinite" }}>
+            <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full"
+                 style={{ transform: "scaleY(-1)" }}>
+              <path d="M0,80 Q14,50 18,24 Q22,8 32,0 C26,10 16,26 14,44 Q11,58 0,80Z" opacity="0.65" />
+              <path d="M32,0 C22,4 8,16 0,32 C6,22 18,12 32,0Z" opacity="0.45" />
+            </svg>
+          </div>
+          <div className="block md:hidden absolute bottom-0 right-0 w-20 h-20 text-primary/[0.15]"
+               style={{ animation: "float 11s ease-in-out 1s infinite" }}>
+            <svg viewBox="0 0 80 80" fill="currentColor" className="w-full h-full"
+                 style={{ transform: "scale(-1,-1)" }}>
+              <path d="M0,80 Q14,50 18,24 Q22,8 32,0 C26,10 16,26 14,44 Q11,58 0,80Z" opacity="0.65" />
+              <path d="M32,0 C22,4 8,16 0,32 C6,22 18,12 32,0Z" opacity="0.45" />
+            </svg>
+          </div>
+
+          {/* Top wave ornament */}
+          <div className="absolute top-5 left-1/2 -translate-x-1/2 w-48 text-primary/[0.22]">
+            <svg viewBox="0 0 192 22" fill="none" stroke="currentColor" strokeWidth="0.9">
+              <path d="M96,11 Q78,2 60,11 Q42,20 24,11 Q12,5 0,11" opacity="0.65" />
+              <path d="M96,11 Q114,2 132,11 Q150,20 168,11 Q180,5 192,11" opacity="0.65" />
+              <circle cx="96" cy="11" r="2.5" fill="currentColor" opacity="0.55" />
+            </svg>
+          </div>
+
+          {/* Bottom wave ornament */}
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-48 text-primary/[0.22]">
+            <svg viewBox="0 0 192 22" fill="none" stroke="currentColor" strokeWidth="0.9">
+              <path d="M96,11 Q78,20 60,11 Q42,2 24,11 Q12,17 0,11" opacity="0.65" />
+              <path d="M96,11 Q114,20 132,11 Q150,2 168,11 Q180,17 192,11" opacity="0.65" />
+              <circle cx="96" cy="11" r="2.5" fill="currentColor" opacity="0.55" />
+            </svg>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Small floral ornament above label */}
+          <div className="flex justify-center mb-3 text-primary/40">
+            <svg viewBox="0 0 40 20" fill="currentColor" className="w-10 h-5">
+              <ellipse cx="20" cy="6" rx="3" ry="6" />
+              <ellipse cx="29" cy="13" rx="3" ry="6" transform="rotate(60 29 13)" />
+              <ellipse cx="11" cy="13" rx="3" ry="6" transform="rotate(-60 11 13)" />
+              <circle cx="20" cy="11" r="1.5" opacity="0.6" />
+            </svg>
+          </div>
+
           <div className="flex items-center justify-center gap-4 mb-5">
             <div className="h-px w-16 bg-primary/30" />
             <p className="text-muted-foreground text-[10px] tracking-[0.5em]">DIGITAL ENVELOPE</p>
