@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { X } from "lucide-react"
+import { useLenis } from "@/components/smooth-scroll-provider"
 
 type Phase = "idle" | "envelope" | "flap" | "qr" | "exit"
 
@@ -20,11 +21,17 @@ export function EnvelopeQR() {
     setTimeout(() => setPhase("idle"), 500)
   }
 
+  const lenis = useLenis()
+
   useEffect(() => {
     if (phase === "idle") return
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close() }
     window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
+    lenis?.stop()
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      lenis?.start()
+    }
   }, [phase])
 
   const envelopeRef = useRef<HTMLDivElement>(null)
